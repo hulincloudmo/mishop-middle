@@ -1,29 +1,41 @@
-# mishop-vue
+#基于Vue.Cli3.0+elementUI+bootstrap构建后台管理系统
 
-## Project setup
-```
-yarn install
-```
+##！！！待解决问题！！！
+一、el-input的autofocus无法触发
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+二、顶部面包蟹动态切换页面（Vue-router堆栈）
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+三、相册管理左侧导航与右侧列表关联变动
 
-### Run your tests
-```
-yarn run test
-```
+ 
 
-### Lints and fixes files
-```
-yarn run lint
-```
+#开发遇到的问题、难点、技巧（解决方案）
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+###一、vue不允许在已经创建的实例上动态添加新的根级响应式属性，Vue也无法去侦测普通的新增属性
+####解决方案：
+代码参考：`this.$set(item, 'imageClick', false);`
+
+在以往的开发传统中，我们使用`this.XXX['key'] = value`这样的方式去给对象添加属性，但是在Vue中这些属性将不会发生响应式变化，这时，我们使用this.$set(需要添加属性的对象,key,value)，这样添加的属性才会被Vue响应式管理
+
+&ensp;&ensp;这里因为考虑到后端不应该提供前端所需要的操作属性，故在页面create的生命周期内，拿到了后端的相应数据后，需要对拿到的data进行前端初始化，这时候使用set对每一个数据遍历后加上所需属性
+###二、动态更新角标问题
+代码参考位置：views/camera：imageClick函数
+
+&ensp;&ensp;角标更新，需要关注两个状态，一个是样式的切换，一个是角标数字更新。角标数字更新本项目维护了一个角标数组，当点击时，给角标数组push入点击的卡片Id，在删除时，有两种情况，一种是删除的卡片为末位，此时只需要删除角标数组对应的项，然后将根images的角标计数器清零，最后切换目标样式即可，另一种情况则是难点：<font size=4 color=#FF0000>**如果选中的是中间的卡片，那么需要对此卡片以后的角标进行更新，这时候，我们首先要拿到当前选择的卡在维护数组中的位置，然后就可以确定需要重新计算的角标，这些角标每一个都需要去-1**</font>
+###三、代码封装与优化
+####mixins混入
+代码参考：@/common/mixins/common,js
+
+&nbsp;&nbsp;在阿里巴巴开发规范中，禁止开发者使用魔法值，为了避免魔法值的使用，一种方法是实现一个枚举类，将业务类型代码进行封装，在js中并没有这样的直接概念，所以这里混入了一个filter方法，很简单，返回num的toString，即可避免魔法值的使用
+####全局配置项
+代码参考：@/common/config/config,js
+&ensp;&ensp;
+
+&ensp;&ensp;为了让一个刚接触项目的程序员能够尽快使用，修改一些固定数据，本项目将一些常用，可快速将项目改变为可用项目的配置类写在了此js中，一些小白程序员也可通过config文件快速对项目进行配置
+###四、骨架屏
+
+###五、api抽离
+
+###六、
+
+
