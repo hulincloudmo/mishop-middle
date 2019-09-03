@@ -6,7 +6,7 @@
                     <router-link :to="{ name: 'shop_goods_create-good' }">
                         <el-button type="success" size="mini">发布商品</el-button>
                     </router-link>
-                    <el-button type="danger" size="mini">批量删除</el-button>
+                    <el-button class="ml-2" type="danger" size="mini">批量删除</el-button>
                     <div class="ml-auto d-flex" v-show="!form.showSenior">
                         <el-input v-model="form.keyword" placeholder="输入商品名称" size="mini" class="mr-1"></el-input>
                         <el-button type="info" size="mini">搜索</el-button>

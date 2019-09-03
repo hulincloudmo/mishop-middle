@@ -60,9 +60,10 @@
                                     v-for="(tag,index) in tags"
                                     :key="index"
                                     closable
-                                    style="margin-left: 20px"
+                                    style="margin-left: 20px;cursor:pointer;"
                                     :type="tag.type"
                                     @close="close(index)"
+                                    @click="navPath(tag)"
                             >
                                 {{tag.name}}
                             </el-tag>
@@ -97,13 +98,15 @@
 
     export default {
         mixins: [mixin],
+        inject: ['reload'],
         name: "layout",
         data() {
             return {
                 navBar: [],
                 bran: [],
                 userInfo: {},
-                tags: []
+                tags: [],
+                nav_flag: false
             }
         },
         created() {
@@ -169,9 +172,11 @@
                     top: this.navBar.active,
                     left: this.slideMenuActive
                 }));
-                this.$router.push({
-                    name: this.slideMenus[key].path_name
-                })
+               if (this.$route.name !== this.slideMenus[key].path_name) {
+                   this.$router.push({
+                       name: this.slideMenus[key].path_name
+                   })
+               }
             },
             getRouterBran() {
                 let filter = this.$route.matched.filter(v => v.name);
@@ -185,7 +190,12 @@
                         path: v.path,
                         title: v.meta.title
                     });
-                    this.tags.push({name: v.name, type: 'success'})
+                    let path_name = this.$route.name;
+                    let path_filter = this.tags.filter(v=>path_name === v.path_name);
+                    if (path_filter.length === 0) {
+                        this.tags.push({name: v.meta.title,path_name: v.name});
+                    }
+
                 });
                 if (arr.length > 0) {
                     arr.unshift({name: 'index', path: '/index', title: '后台首页'});
@@ -194,6 +204,13 @@
             },
             close(index) {
                 this.tags.splice(index, 1)
+            },
+            navPath(tag) {
+                if (this.$route.name === tag.path_name) {
+                    this.reload();
+                    return
+                }
+                this.$router.push({name:tag.path_name})
             }
         }
     }

@@ -159,6 +159,7 @@
 
     export default {
         name: "camera",
+
         data() {
             return {
                 searchForm: {

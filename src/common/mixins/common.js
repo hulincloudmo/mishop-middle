@@ -5,15 +5,9 @@ export default {
         }
     },
     mounted() {
-        window.addEventListener('beforunload',e=>this.beforeUnloadHandler())
+
     },
     methods: {
-        beforeUnloadHandler() {
 
-            // localStorage.setItem('navActive', JSON.stringify({
-            //     top: 0,
-            //     left: 0
-            // }));
-        }
     }
 }
