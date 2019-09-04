@@ -1,6 +1,5 @@
 export default {
     state: {
-        createGood: {
             skus_type:0,
             title: "",
             category: [],
@@ -10,20 +9,20 @@ export default {
             min_stock:0,
             display_stock:0,
             status:0,
-            express:""
-        }
+            express:"",
+
+            oprice:0, // 市场价格
+            pprice:0, // 销售价格
+            cprice:0, // 成本价格
+            weight:0, // 重量
+            volume:0, // 体积
+
     },
     getters: {
-        getSku: (state)=> {
-            return state.createGood.skus_type === 0
-        }
+
     },
     mutations: {
-        setSku(state) {
-            state.skus_type =  state.skus_type === 1? 0 : 1
-        },
         vModelState(state,{key,value}) {
-            console.log(value)
             state[key] = value;
         }
     },
