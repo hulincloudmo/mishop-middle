@@ -149,6 +149,9 @@
                 }
             },
             handleSelect(key, keyPath) {
+                if (this.navBar.active === key) {
+                    return
+                }
                 if (key === "2-1") {
                     console.log("修改用户资料")
                 } else if (key === '2-2') {
@@ -160,9 +163,9 @@
                         left: this.slideMenuActive
                     }));
                     this.slideMenuActive = '0';
-                    this.$router.push({
-                        name: this.slideMenus[this.slideMenuActive].path_name
-                    })
+                       this.$router.push({
+                           name: this.slideMenus[this.slideMenuActive].path_name
+                       })
                 }
 
             },

@@ -17,6 +17,14 @@ export default {
             weight:0, // 重量
             volume:0, // 体积
 
+            skuCard: [
+                {
+                    name: "颜色",
+                    type: 0,
+                    list:[]
+                }
+            ]
+
     },
     getters: {
 
@@ -24,6 +32,19 @@ export default {
     mutations: {
         vModelState(state,{key,value}) {
             state[key] = value;
+        },
+        addSkuCard(state) {
+            state.skuCard.push({
+                name: "规格名称",
+                type:0,
+                list: []
+            })
+        },
+        vModelSkuCard(state,{index,key,value}) {
+            state.skuCard[index][key] = value
+        },
+        delSkuCard(state,index) {
+            state.skuCard.splice(index,1)
         }
     },
     actions: {
