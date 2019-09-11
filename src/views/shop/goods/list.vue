@@ -199,6 +199,19 @@
                         store:200,
                         pprice:1000,
                         ischeck:1
+                    },
+                    {
+                        id:2,
+                        title: '荣耀 V10全网通 标配版',
+                        cover: 'http://static.yoshop.xany6.com/2018071718294208f086786.jpg',
+                        create_time: '2019-07-17 18:34:14',
+                        category:"手机",
+                        sale_count:20,
+                        order:100,
+                        status:1,
+                        store:200,
+                        pprice:1000,
+                        ischeck:1
                     }
                 ],
                 multipleSelection: []
@@ -206,7 +219,7 @@
         },
         mounted() {
           for(let i = 0; i<20; i++) {
-              this.tableData.push(this.tableData[0])
+              // this.tableData.push(this.tableData[0])
           }
         },
         methods: {

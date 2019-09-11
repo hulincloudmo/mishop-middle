@@ -6,9 +6,8 @@
                      v-for="(item,index) in skuCard" :key="index">
                     <div class="card-header d-flex align-items-center">
                         规格项：
-                        <el-input size="mini" :value="item.name" style="width: 200px;">
+                        <el-input size="mini" :value="item.name" @input="vModel(index,'name',$event)" style="width: 200px;">
                             <el-button slot="append"
-                                       @input="vModel(index,'name',$event)"
                                        icon="el-icon-more"></el-button>
                         </el-input>
                         <el-radio-group size="mini"
@@ -19,10 +18,19 @@
                             <el-radio :label="1">颜色</el-radio>
                             <el-radio :label="2">图片</el-radio>
                         </el-radio-group>
+                        <!--上移-->
+
                         <el-button size="mini" class="ml-auto"
-                                   icon="el-icon-top"></el-button>
+                                   icon="el-icon-top"
+                                   :disabled="index === 0"
+                                   @click="sortCard('moveUp',index)"
+                                    ></el-button>
+                        <!--下移-->
                         <el-button size="mini"
-                                   icon="el-icon-bottom"></el-button>
+                                   icon="el-icon-bottom"
+                                   :disabled="index === getSkuCardLength"
+                                   @click="sortCard('moveDown',index)"
+                                    ></el-button>
                         <el-button size="mini"
                                    type="text" @click="delSkuCard(index)">删除</el-button>
                     </div>
@@ -59,6 +67,11 @@
     import { mapState,mapMutations } from "vuex"
     export default {
         name: "multiple-attrs",
+        data(){
+            return {
+
+            }
+        },
         computed:{
             ...mapState({
                 oprice:state=>state.goodCreate.oprice,
@@ -67,17 +80,24 @@
                 weight:state=>state.goodCreate.weight,
                 volume:state=>state.goodCreate.volume,
                 skuCard:state=>state.goodCreate.skuCard
-            })
+            }),
+            getSkuCardLength() {
+                return this.skuCard.length - 1
+            }
         },
         methods: {
             ...mapMutations([
                 'vModelState',
                 'addSkuCard',
                 'delSkuCard',
-                'vModelSkuCard'
+                'vModelSkuCard',
+                'sortSkuCard'
             ]),
             vModel(index,key,value) {
                 this.vModelSkuCard({index,key,value})
+            },
+            sortCard(action,index) {
+                this.sortSkuCard({action,index})
             }
         }
     }

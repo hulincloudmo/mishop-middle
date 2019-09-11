@@ -1,3 +1,4 @@
+import $utils from "@/common/utils/util.js"
 export default {
     state: {
             skus_type:0,
@@ -45,6 +46,9 @@ export default {
         },
         delSkuCard(state,index) {
             state.skuCard.splice(index,1)
+        },
+        sortSkuCard(state,{action,index}) {
+            $utils[action](state.skuCard,index)
         }
     },
     actions: {
