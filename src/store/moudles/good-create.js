@@ -22,7 +22,9 @@ export default {
                 {
                     name: "颜色",
                     type: 0,
-                    list:[]
+                    list:[
+
+                    ]
                 }
             ]
 
@@ -47,8 +49,23 @@ export default {
         delSkuCard(state,index) {
             state.skuCard.splice(index,1)
         },
+        delSkuValue(state,{ index,skuIndex }) {
+            console.log(skuIndex)
+            state.skuCard[index].list.splice(skuIndex,1)
+        },
         sortSkuCard(state,{action,index}) {
             $utils[action](state.skuCard,index)
+        },
+        updateSkuValue(state,{index,skuIndex,key,value}) {
+            state.skuCard[index].list[skuIndex][key] = value
+        },
+    //    增加属性
+        addSkuValue(state,index) {
+            state.skuCard[index].list.push({
+                name: "规格名称",
+                image: "",
+                color: ""
+            })
         }
     },
     actions: {

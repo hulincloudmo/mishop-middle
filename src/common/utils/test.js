@@ -19,8 +19,20 @@ let rule = [
     }
 ];
 
-let formVal = new formClass(form,rule);
-formVal.formValor().then(console.log);
+// swapArray(arr, index1, index2) {
+//     arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+//     return arr;
+// }
+//
+// moveUp(arr, index) {
+//     this.swapArray(arr, index, index - 1);
+// }
 
+let formVal = new formClass(form,rule);
+// formVal.formValor().then(console.log);
+let arr = ["test1","test2","test3"];
+
+// let ["test1",...arr] = arr
+console.log(...arr);
 
 

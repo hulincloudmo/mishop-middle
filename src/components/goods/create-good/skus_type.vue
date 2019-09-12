@@ -38,7 +38,8 @@
         },
         methods: {
             ...mapMutations([
-                'vModelState'
+                'vModelState',
+
             ]),
             vModel(key,value) {
                 this.vModelState({ key,value })
