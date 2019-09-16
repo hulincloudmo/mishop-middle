@@ -9,22 +9,26 @@ module.exports = class formVal {
         for(let item of this.rules) {
             let key = item.name;
             let ruleArr = item.rule;
-            let mult = item.isMult;
+            let isOptional = item.isOptional;
             let msgArr = item.msg;
             if (!key || ruleArr.length === 0 || msgArr.length === 0 ) {
                 continue;
             }
             if (ruleArr.length !== msgArr.length) {
-                return new Error('你的验证规则和错误返回信息没填对哦，要一一对应')
+                throw new Error('你的验证规则和错误返回信息没填对哦，要一一对应')
             }
-            if (mult) {
+            if (isOptional) {
                  msg = await this.multVal(ruleArr,msgArr,key);
                  if (typeof(msg) === 'string') {
                      return  msg
                  }
 
             } else {
-                 msg = await this.singleVal(ruleArr,msgArr,key);
+                try {
+                    msg = await this.singleVal(ruleArr, msgArr, key);
+                } catch (e) {
+                    return e
+                }
                  if (typeof(msg) === 'string') {
                     return msg
                  }
@@ -105,6 +109,7 @@ module.exports = class formVal {
                     break;
             }
             if (isError) {
+                // 一旦一条校验规则不通过，则立即终止这个字段的验证
                 return msgArr[i]
             }
         }
