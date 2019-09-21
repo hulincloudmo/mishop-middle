@@ -43,7 +43,8 @@ export default {
                 list: []
             })
         },
-        vModelSkuCard(state,{index,key,value}) {
+        vModelSkuCard(state,{ key,index,value}){
+            console.log(key,index,value)
             state.skuCard[index][key] = value
         },
         delSkuCard(state,index) {
@@ -56,8 +57,8 @@ export default {
         sortSkuCard(state,{action,index}) {
             $utils[action](state.skuCard,index)
         },
-        updateSkuValue(state,{index,skuIndex,key,value}) {
-            state.skuCard[index].list[skuIndex][key] = value
+        updateSkuValue(state,{cardIndex,valueIndex,key,value}){
+            state.skuCard[cardIndex].list[valueIndex][key] = value
         },
     //    增加属性
         addSkuValue(state,index) {

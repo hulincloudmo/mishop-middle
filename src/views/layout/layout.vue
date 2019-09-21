@@ -39,10 +39,27 @@
                             @select="slideSelect"
                             style="height: 100%"
                     >
-                        <el-menu-item :index="index|numToString" v-for="(item,index) in slideMenus" :key="index">
-                            <i :class="item.icon"></i>
-                            <span slot="title">{{item.name}}</span>
-                        </el-menu-item>
+
+                            <template v-for="(item,index) in slideMenus">
+                                <div v-if="!item.list">
+                                    <el-menu-item :index="index|numToString" :key="index">
+                                        <i :class="item.icon"></i>
+                                        <span slot="title">{{item.name}}</span>
+                                    </el-menu-item>
+                                </div>
+                                <div v-else>
+                                    <el-submenu :index="index">
+                                        <template slot="title">
+                                            <i :class="item.icon" class="mr-2"></i>
+                                            <span>{{item.name}}</span>
+                                        </template>
+                                        <el-menu-item-group v-for="(children,childrenIndex) in item.list" :key="childrenIndex">
+                                            <el-menu-item :index="children.index" style="font-size: 10px;padding-right: 10px">{{children.name}}</el-menu-item>
+                                        </el-menu-item-group>
+                                    </el-submenu>
+                                </div>
+                            </template>
+
                     </el-menu>
                 </el-aside>
                 <el-main class="bg-light" style="position: relative;">
@@ -175,11 +192,23 @@
                     top: this.navBar.active,
                     left: this.slideMenuActive
                 }));
-               if (this.$route.name !== this.slideMenus[key].path_name) {
-                   this.$router.push({
-                       name: this.slideMenus[key].path_name
-                   })
-               }
+                let isMult = key.indexOf('-')
+                if(isMult < 0) {
+                    if (this.$route.name !== this.slideMenus[key].path_name) {
+                        this.$router.push({
+                            name: this.slideMenus[key].path_name
+                        })
+                    }
+                } else {
+                    let father = key.substring(0,isMult)-1
+                    let children = key.substring(isMult+1,key.length)-1
+                    if(this.$route.name !== this.slideMenus[father].list[children].path_name){
+                        this.$router.push({
+                            name: this.slideMenus[father].list[children].path_name
+                        })
+                    }
+                }
+
             },
             getRouterBran() {
                 let filter = this.$route.matched.filter(v => v.name);

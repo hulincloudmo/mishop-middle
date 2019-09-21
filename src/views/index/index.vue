@@ -8,8 +8,10 @@
                         <div class="ml-4" style="line-height: 100px">
                             <i :class="[item.icon,item.color]" class="" style="width: 40px;height: 40px;text-align: center;line-height: 40px;color: white" ></i>
                         </div>
-                        <div class="d-flex mt-2" style="flex-direction: column;width: 1000px; line-height: 20px;justify-content: center;text-align: left" >
-                            <p class="mb-3 ml-3" style="font-weight: bold;font-size: 30px">{{item.num}}</p>
+                        <div class="d-flex mt-2" style="flex-direction: column;width: 1000px; line-height: 2px;justify-content: center;text-align: left" >
+                            <p class="mb-3 ml-3" style="font-weight: bold;font-size: 30px">
+                                <count-to :end="item.num|numToString"></count-to>
+                            </p>
                             <p class="ml-3 text-muted">{{item.desc}}</p>
                         </div>
                     </div>
@@ -61,7 +63,8 @@
                                     </div>
                                     <div class="d-flex mt-2">
                                         <span class="mr-2 text-muted">订单金额(元)</span>
-                                        <span>12</span>
+<!--                                        <span>12</span>-->
+                                        <count-to end="2534"></count-to>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +122,13 @@
 </template>
 
 <script>
+    import countTo from '@/components/count-to/count-to'
+    import mixin from '@/common/mixins/common'
     export default {
+        mixins:[mixin],
+        components:{
+            countTo
+        },
         name: "index",
         data() {
           return {

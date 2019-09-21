@@ -8,6 +8,16 @@ import qs from 'qs'
 import config from './common/config/config.js'
 import eCharts from 'echarts'
 
+const errorHandler = (error, vm)=>{
+  console.error('抛出全局异常');
+  console.error(vm);
+  console.error(error);
+
+}
+
+Vue.config.errorHandler = errorHandler;
+Vue.prototype.$throw = (error)=> errorHandler(error,this);
+
 Vue.prototype.qs = qs;
 Vue.prototype.axios = axios;
 Vue.prototype.serverUrl = "http://127.0.0.1:8081";

@@ -23,9 +23,25 @@ let routes = [
             },
             {
                 meta:{ title: '财务管理' },
-                component: 'finance/finance'
-            }
-            ]
+                component: 'finance/finance',
+                children: [
+                    {
+                        meta: { title: '应收对账' },
+                        name: 'reconciliation-receivable',
+                        component: 'finance/reconciliation-receivable'
+                    },
+                    // {
+                    //     meta: { title: '应收核销' },
+                    //     name: 'reconciliation-receivable',
+                    //     component: 'finance/reconciliation-receivable'
+                    // }
+                ]
+            },
+            // {
+            //     meta: { title: '统计报表' },
+            //     component: 'journal-sheet/journal-sheet'
+            // }
+        ]
     },
     {
       component: 'login/login'
@@ -40,6 +56,7 @@ let routes = [
 let getRoutes = function () {
     createRoute(routes);
     return routes;
+
 };
 
 //递归生成路由

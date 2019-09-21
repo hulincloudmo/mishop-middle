@@ -37,43 +37,14 @@
                         </el-button>
                     </div>
                     <div class="card-body">
-                        <!--                        规格属性-->
-                        <div class="d-flex align-items-center flex-wrap">
-                            <div class="border py-2 px-4 rounded mr-2 position-relative" v-if="item.type !== 0">
-                                <div class="d-flex align-items-center" v-if="item.type === 1">
-                                    <div class="block mr-2">
-                                        <el-color-picker size="mini" v-model="skus_color"></el-color-picker>
-                                    </div>
-                                    <span>颜色</span>
-                                </div>
-                                <span class="btn btn-light mr-2" v-if="item.type === 2">
-                                    <i class="el-icon-plus"></i>
-                                </span>
-                                <span class="btn btn-light p-0 position-absolute"
-                                      style="line-height: 1;right: -10px;top:-10px">
-                                <i class="icon el-icon-circle-close"></i>
-                            </span>
-                            </div>
-                        </div>
                         <!--规格列表-->
-                            <div class="d-flex align-items-center flex-wrap mt-3">
-                                <div class="py-2 position-relative rounded mr-2" v-for="(sku,skuIndex) in item.list" :key="skuIndex">
-                                    <el-input
-                                            size="mini"
-                                            style="width: 80px"
-                                            :value="sku.name"
-                                            @input="vModelSku(index,skuIndex,'name',$event)"
-                                    ></el-input>
-                                    <span class="btn btn-light p-0 position-absolute"
-                                          style="line-height: 1;right: -10px;top:-10px"
-                                          @click="delSkuValue({ index,skuIndex })">
-                                        <i class="icon el-icon-circle-close"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        <!-- 占位 -->
-<!--                        <div style="height: 50px"></div>-->
-
+                        <div class="d-flex align-items-center flex-wrap">
+                            <sku-card :type="item.type"
+                                      v-for="(item2,index2) in item.list"
+                                      :key="index2" :item="item2"
+                                      :index="index2" :cardIndex="index"
+                            ></sku-card>
+                        </div>
                         <div>
                             <el-button type="text" size="mini"
                                        icon="el-icon-plus" @click="addSkuValue(index)">
@@ -103,8 +74,12 @@
 
 <script>
     import {mapState, mapMutations} from "vuex"
+    import skuCard from './sku-card-children.vue'
 
     export default {
+        components: {
+            skuCard
+        },
         name: "multiple-attrs",
         data() {
             return {
@@ -140,9 +115,6 @@
             },
             sortCard(action, index) {
                 this.sortSkuCard({action, index})
-            },
-            vModelSku(index,skuIndex,key,value) {
-                this.updateSkuValue({ index,skuIndex,key,value })
             }
         }
     }

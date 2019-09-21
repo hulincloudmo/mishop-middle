@@ -20,7 +20,87 @@ export default {
                     {
                         icon: "el-icon-picture",
                         name: "财务管理",
-                        path_name: 'finance_finance'
+                        path_name: 'finance_finance',
+                        list: [
+                            {
+                                name: '应对收账',
+                                index: '3-1',
+                                path_name: 'reconciliation-receivable'
+                            },
+                            {
+                                name: '应付对账',
+                                index: '3-2',
+                                path_name: 'finance_finance_payable_receivable'
+                            },
+                            {
+                                name: '车辆成本',
+                                index: '3-3',
+                                path_name: 'finance_finance_car_cost'
+                            },
+                            {
+                                name: '应收核销',
+                                index: '3-4',
+                                path_name: 'reconciliation-receivable'
+                            },
+                            {
+                                name: '应付核销',
+                                index: '3-5',
+                                path_name: 'finance_finance_payable_cost'
+                            },
+                            {
+                                name: '日常开销',
+                                index: '3-6',
+                                path_name: 'finance_finance_daily_pay'
+                            },
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-s-finance',
+                        name: '统计报表',
+                        path_name: 'journal-sheet',
+                        list: [
+                            {
+                                name: '支出表',
+                                index: '4-1',
+                                path_name: 'pay'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-s-finance',
+                        name: '基础数据',
+                        path_name: 'journal-sheet',
+                        list: [
+                            {
+                                name: '支出表',
+                                index: '4-1',
+                                path_name: 'pay'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-s-finance',
+                        name: '用户管理',
+                        path_name: 'journal-sheet',
+                        list: [
+                            {
+                                name: '支出表',
+                                index: '4-1',
+                                path_name: 'pay'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-s-finance',
+                        name: '车辆管理',
+                        path_name: 'journal-sheet',
+                        list: [
+                            {
+                                name: '支出表',
+                                index: '4-1',
+                                path_name: 'pay'
+                            }
+                        ]
                     }
                 ]
             },
