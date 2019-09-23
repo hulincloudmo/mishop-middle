@@ -44,14 +44,12 @@ export default {
             })
         },
         vModelSkuCard(state,{ key,index,value}){
-            console.log(key,index,value)
             state.skuCard[index][key] = value
         },
         delSkuCard(state,index) {
             state.skuCard.splice(index,1)
         },
         delSkuValue(state,{ index,skuIndex }) {
-            console.log(skuIndex)
             state.skuCard[index].list.splice(skuIndex,1)
         },
         sortSkuCard(state,{action,index}) {
@@ -67,6 +65,9 @@ export default {
                 image: "",
                 color: ""
             })
+        },
+        sortSKuCardValue(state,{index,list}) {
+
         }
     },
     actions: {

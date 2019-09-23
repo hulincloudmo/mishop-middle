@@ -1,11 +1,12 @@
 <template>
-    <div>
-       <div class="container ">
+    <div style="position: relative">
+        <img src="./login-bg.jpg" alt="">
+       <div class="container" style="position: absolute;top: 15rem;left: 60rem">
            <div class="row m-auto">
                <div class="el-col-12 el-col-sm-8 el-col-md-6 el-col-lg-4 m-auto" style="width:500px;height: 250px">
                    <el-card>
                        <div class="el-card__header text-center">
-                           <h3>中台管理</h3>
+                           <h3>陌上青夏的管理平台</h3>
                        </div>
 
                        <div class="el-card__body">
@@ -21,7 +22,7 @@
                                 </el-form-item>
                             </el-form>
                        </div>
-
+                       <div style="text-align: center;color: #1c7430">输入任意账号密码即可登录</div>
                    </el-card>
                </div>
            </div>
@@ -50,32 +51,39 @@
         },
         methods: {
             submit() {
-                this.$refs.ruleForm.validate( (val) => {
-                    if (!val) {
-                        return;
-                    } else {
-                        let serverUrl = this.serverUrl;
-                        let form = this.form;
-                        this.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-                        //转换请求为form-data
-                        this.axios.defaults.transformRequest = [function (data) {
-                            let ret = '';
-                            for (let it in data) {
-                                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-                            }
-                            return ret
-                        }];
-                        this.axios.post(`${serverUrl}/user/login`, {
-                                username:form.username,
-                                password:form.password
+                // this.$refs.ruleForm.validate( (val) => {
+                //     if (!val) {
+                //         return;
+                //     } else {
+                //         let serverUrl = this.serverUrl;
+                //         let form = this.form;
+                //         this.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+                //         //转换请求为form-data
+                //         this.axios.defaults.transformRequest = [function (data) {
+                //             let ret = '';
+                //             for (let it in data) {
+                //                 ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                //             }
+                //             return ret
+                //         }];
+                //         this.axios.post(`${serverUrl}/user/login`, {
+                //                 username:form.username,
+                //                 password:form.password
+                //
+                //         }).then((res) => {
+                //             if (res.data.status === 200) {
+                //                 this.$router.push({name: 'index'})
+                //             }
+                //         })
+                //     }
+                // });
+                localStorage.setItem('userInfo',{
+                    name: '陌上青夏'
+                })
 
-                        }).then((res) => {
-                            if (res.data.status === 200) {
-                                this.$router.push({name: 'index'})
-                            }
-                        })
-                    }
-                });
+                this.$router.push({
+                    name: 'layout'
+                })
             }
         }
     }

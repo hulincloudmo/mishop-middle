@@ -44,7 +44,8 @@ let routes = [
         ]
     },
     {
-      component: 'login/login'
+       path: "/login",
+       component: 'login/login'
     },
     {
         path: "*",

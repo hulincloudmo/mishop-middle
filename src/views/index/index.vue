@@ -167,6 +167,12 @@
           }
         },
         beforeMount() {
+            let data = localStorage.getItem('userInfo')
+            if(!data) {
+                this.$router.push({
+                    name: 'login'
+                })
+            }
             //初始化数据
             this.counts = this.$conf.counts;
             this.tips = this.$conf.tips

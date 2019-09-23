@@ -1,3 +1,5 @@
+import lodash from 'lodash'
+
 export default {
 	// sku排列算法
 	cartesianProductOf() {
@@ -23,4 +25,8 @@ export default {
     moveDown(arr, index) {
       this.swapArray(arr, index, index + 1);
     },
+	//深拷贝对象
+	cloneDeep(obj) {
+		return lodash.cloneDeep(obj)
+	}
 }

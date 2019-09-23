@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store/index.js'
 import './plugins/element.js'
+import VueDND from 'awe-dnd'
 import axios from 'axios'
 import qs from 'qs'
 import config from './common/config/config.js'
@@ -12,8 +13,10 @@ const errorHandler = (error, vm)=>{
   console.error('抛出全局异常');
   console.error(vm);
   console.error(error);
-
 }
+
+Vue.use(VueDND)
+
 
 Vue.config.errorHandler = errorHandler;
 Vue.prototype.$throw = (error)=> errorHandler(error,this);

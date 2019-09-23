@@ -41,6 +41,7 @@
                         <div class="d-flex align-items-center flex-wrap">
                             <sku-card :type="item.type"
                                       v-for="(item2,index2) in item.list"
+                                      v-dragging="{ item: item2,list:item.list,group: `skuItem${index}` }"
                                       :key="index2" :item="item2"
                                       :index="index2" :cardIndex="index"
                             ></sku-card>
@@ -99,6 +100,11 @@
                 return this.skuCard.length - 1
             }
         },
+        mounted() {
+            this.$dragging.$on(`dragend`,(e)=>{
+                console.log(e)
+            })
+        },
         methods: {
             ...mapMutations([
                 'vModelState',
@@ -108,7 +114,8 @@
                 'sortSkuCard',
                 'addSkuValue',
                 'updateSkuValue',
-                'delSkuValue'
+                'delSkuValue',
+                'sortSKuCardValue'
             ]),
             vModel(index, key, value) {
                 this.vModelSkuCard({index, key, value})
